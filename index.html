@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lady Angeline's Portfolio</title>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #ffb6c1 0%, #ffcccb 100%);
+      color: #333;
+      overflow-x: hidden;
+      position: relative;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('img/background.gif');
+      background-size: cover;
+      opacity: 0.2;
+      z-index: -1;
+      animation: none;
+    }
+    .navbar {
+      background: rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(10px);
+      padding: 1rem 0;
+    }
+    .navbar-brand, .nav-link {
+      color: #fff !important;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+    .nav-link:hover {
+      text-decoration: underline;
+      text-underline-offset: 5px;
+    }
+    .nav-link:not(:hover) {
+      text-decoration: none;
+    }
+    .hero-section {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: url('https://images.unsplash.com/photo-1507521628349-6e9b9a9c7e6f?q=80&w=1470&auto=format&fit=crop') no-repeat center center/cover;
+      color: #fff;
+      position: relative;
+    }
+    .hero-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: 1;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+    }
+    .hero-content h1 {
+      font-size: 3.5rem;
+      font-weight: 700;
+    }
+    .hero-content p {
+      font-size: 1.5rem;
+      margin: 1rem 0;
+    }
+    .profile-img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid #fff;
+      margin-bottom: 1rem;
+    }
+    .typing-text {
+      font-size: 1.5rem;
+      color: #fff;
+      display: inline-block;
+      border-right: 2px solid #fff;
+      white-space: nowrap;
+      overflow: hidden;
+      animation: blink 0.7s infinite;
+      vertical-align: top;
+    }
+    @keyframes blink {
+      50% { border-color: transparent; }
+    }
+    .section-title {
+      font-size: 2.5rem;
+      font-weight: 600;
+      color: #2c3e50;
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    .content-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      padding: 1rem;
+    }
+    .content-item {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 15px;
+      padding: 1rem;
+      text-align: center;
+      transition: transform 0.3s ease;
+      width: 300px;
+    }
+    .content-item:hover {
+      transform: translateY(-10px);
+    }
+    .content-item img, .content-item video {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+    }
+    .content-item h5 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .content-item p {
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+    .contact-section {
+      background: #fff;
+      padding: 3rem;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+    .social-icons a {
+      font-size: 2.5rem;
+      margin: 0 1rem;
+      color: #2c3e50;
+      transition: color 0.3s ease;
+    }
+    .social-icons a:hover {
+      color: #ff6f61;
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 1rem;
+    }
+    .gallery-item img, .gallery-item video {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+    .modal-body img, .modal-body video {
+      width: 100%;
+      max-height: 80vh;
+      object-fit: contain;
+    }
+    .dropdown-section {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 15px;
+      padding: 1rem;
+      text-align: center;
+      margin-bottom: 1rem;
+      width: 300px;
+    }
+    .dropdown-section img, .dropdown-section video {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-top: 1rem;
+    }
+    .dropdown-section h5 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .dropdown-section p {
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#home">Lady Angeline</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+          <li class="nav-item"><a class="nav-link" href="#hobbies">Hobbies</a></li>
+          <li class="nav-item"><a class="nav-link" href="#dogs">Dogs</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero-section">
+    <div class="hero-content">
+      <img src="./img/profile.jpg" alt="Lady Angeline" class="profile-img">
+      <h1>Hi, I'm Lady Angeline</h1>
+      <p>I'm a <span class="typing-text"></span></p>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills" class="py-5">
+    <div class="container">
+      <h2 class="section-title">Skills</h2>
+      <div class="content-grid">
+        <div class="dropdown-section">
+          <div class="accordion" id="videoEditingAccordion">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="videoEditingHeading">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#videoEditingCollapse" aria-expanded="true" aria-controls="videoEditingCollapse">
+                  Video Editing
+                </button>
+              </h2>
+              <div id="videoEditingCollapse" class="accordion-collapse collapse show" aria-labelledby="videoEditingHeading" data-bs-parent="#videoEditingAccordion">
+                <div class="accordion-body">
+                  <video controls loop>
+                    <source src="./edits/frieren.mp4" type="video/mp4">
+                  </video>
+                  <h5>Video Editing</h5>
+                  <p>Film and anime-inspired video editing, I love anime!</p>
+                  <button class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#videoEditingModal">See All</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="dropdown-section">
+          <div class="accordion" id="gamingContentAccordion">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="gamingContentHeading">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#gamingContentCollapse" aria-expanded="true" aria-controls="gamingContentCollapse">
+                  Gaming Content
+                </button>
+              </h2>
+              <div id="gamingContentCollapse" class="accordion-collapse collapse show" aria-labelledby="gamingContentHeading" data-bs-parent="#gamingContentAccordion">
+                <div class="accordion-body">
+                  <img src="./img/mobile legends.jpg" alt="Gaming">
+                  <h5>Gaming Content</h5>
+                  <p>Gameplay videos, including tournaments.</p>
+                  <button class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#gamingModal">See All</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="dropdown-section">
+          <div class="accordion" id="animatingAccordion">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="animatingHeading">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#animatingCollapse" aria-expanded="true" aria-controls="animatingCollapse">
+                  Animating
+                </button>
+              </h2>
+              <div id="animatingCollapse" class="accordion-collapse collapse show" aria-labelledby="animatingHeading" data-bs-parent="#animatingAccordion">
+                <div class="accordion-body">
+                  <video controls loop>
+                    <source src="./edits/animate.mp4" type="video/mp4">
+                  </video>
+                  <h5>Animating</h5>
+                  <p>Animations I personally make, inspired by anime.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="dropdown-section">
+          <div class="accordion" id="photoEditingAccordion">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="photoEditingHeading">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#photoEditingCollapse" aria-expanded="true" aria-controls="photoEditingCollapse">
+                  Photo Editing
+                </button>
+              </h2>
+              <div id="photoEditingCollapse" class="accordion-collapse collapse show" aria-labelledby="photoEditingHeading" data-bs-parent="#photoEditingAccordion">
+                <div class="accordion-body">
+                  <img src="./img/edit.jpg" alt="Photo Editing">
+                  <h5>Photo Editing</h5>
+                  <p>Creative photo edits for various projects.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Hobbies Section -->
+  <section id="hobbies" class="py-5">
+    <div class="container">
+      <h2 class="section-title">My Hobbies</h2>
+      <div class="content-grid">
+        <div class="dropdown-section">
+          <div class="accordion" id="musicAccordion">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="musicHeading">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#musicCollapse" aria-expanded="true" aria-controls="musicCollapse">
+                  Listening to Music
+                </button>
+              </h2>
+              <div id="musicCollapse" class="accordion-collapse collapse show" aria-labelledby="musicHeading" data-bs-parent="#musicAccordion">
+                <div class="accordion-body">
+                  <img src="./img/billie and taylor.jpg" alt="Music">
+                  <h5>Listening to Music</h5>
+                  <p>Billie Eilish and Taylor Swift songs are my favorite.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="dropdown-section">
+          <div class="accordion" id="onlineGamesAccordion">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="onlineGamesHeading">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#onlineGamesCollapse" aria-expanded="true" aria-controls="onlineGamesCollapse">
+                  Playing Online Games
+                </button>
+              </h2>
+              <div id="onlineGamesCollapse" class="accordion-collapse collapse show" aria-labelledby="onlineGamesHeading" data-bs-parent="#onlineGamesAccordion">
+                <div class="accordion-body">
+                  <img src="./img/mobile legends.jpg" alt="Games">
+                  <h5>Playing Online Games</h5>
+                  <p>I play Mobile Legends, HSR, HOK, Genshin, and more.</p>
+                  <button class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#gamingModal">See All</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="dropdown-section">
+          <div class="accordion" id="roadTripsAccordion">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="roadTripsHeading">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#roadTripsCollapse" aria-expanded="true" aria-controls="roadTripsCollapse">
+                  Road Trips
+                </button>
+              </h2>
+              <div id="roadTripsCollapse" class="accordion-collapse collapse show" aria-labelledby="roadTripsHeading" data-bs-parent="#roadTripsAccordion">
+                <div class="accordion-body">
+                  <img src="./img/fam.jpg" alt="Road Trip">
+                  <h5>Road Trips</h5>
+                  <p>I love visiting places like Baguio City with my family.</p>
+                  <button class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#roadTripModal">See All</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="dropdown-section">
+          <div class="accordion" id="idolAppreciationAccordion">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="idolAppreciationHeading">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#idolAppreciationCollapse" aria-expanded="true" aria-controls="idolAppreciationCollapse">
+                  Idol Appreciation
+                </button>
+              </h2>
+              <div id="idolAppreciationCollapse" class="accordion-collapse collapse show" aria-labelledby="idolAppreciationHeading" data-bs-parent="#idolAppreciationAccordion">
+                <div class="accordion-body">
+                  <video controls loop>
+                    <source src="./idols/hadjii.mp4" type="video/mp4">
+                  </video>
+                  <h5>Idol Appreciation</h5>
+                  <p>I admire Hadji and Billie Eilish, videos edited by me!</p>
+                  <button class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#idolsModal">See All</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="dropdown-section">
+          <div class="accordion" id="gamingWithBoyfriendAccordion">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="gamingWithBoyfriendHeading">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#gamingWithBoyfriendCollapse" aria-expanded="true" aria-controls="gamingWithBoyfriendCollapse">
+                  Gaming with My Boyfriend
+                </button>
+              </h2>
+              <div id="gamingWithBoyfriendCollapse" class="accordion-collapse collapse show" aria-labelledby="gamingWithBoyfriendHeading" data-bs-parent="#gamingWithBoyfriendAccordion">
+                <div class="accordion-body">
+                  <video controls loop>
+                    <source src="./gameplays/boyfiee.mp4" type="video/mp4">
+                  </video>
+                  <h5>Gaming with My Boyfriend</h5>
+                  <p>In an LDR, we bond over Mobile Legends gameplay.</p>
+                  <button class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#bfGamingModal">See All</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dogs Section -->
+  <section id="dogs" class="py-5">
+    <div class="container">
+      <h2 class="section-title">Dogs</h2>
+      <div class="content-grid">
+        <div class="content-item">
+          <img src="./img/dogs.jpeg" alt="Dogs Preview">
+          <p>These are all our dogs!</p>
+          <button class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#dogsModal">See All</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="py-5">
+    <div class="container">
+      <h2 class="section-title">Get in Touch</h2>
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <div class="contact-section">
+            <div class="social-icons text-center mb-4">
+              <a href="https://web.facebook.com/ladyline.lantin/" target="_blank"><i class="bi bi-facebook"></i></a>
+              <a href="https://www.tiktok.com/@slyr3ia" target="_blank"><i class="bi bi-tiktok"></i></a>
+              <a href="" target="_blank"><i class="bi bi-controller"></i></a>
+            </div>
+            <form>
+              <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" id="name" placeholder="Your Name">
+              </div>
+              <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" placeholder="Your Email">
+              </div>
+              <div class="mb-3">
+                <label for="message" class="form-label">Message</label>
+                <textarea class="form-control" id="message" rows="5" placeholder="Your Message"></textarea>
+              </div>
+              <button type="button" class="btn btn-primary w-100">Send Message</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Modals for See All -->
+  <!-- Video Editing Modal -->
+  <div class="modal fade" id="videoEditingModal" tabindex="-1" aria-labelledby="videoEditingModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="videoEditingModalLabel">Video Editing Gallery</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="gallery-grid">
+            <div class="gallery-item"><video controls><source src="./edits/gojo and sukuna.mp4" type="video/mp4"></video></div>
+            <div class="gallery-item"><video controls><source src="./edits/squid game.mp4" type="video/mp4"></video></div>
+            <div class="gallery-item"><video controls><source src="./edits/solo leveling.mp4" type="video/mp4"></video></div>
+            <div class="gallery-item"><video controls><source src="./edits/frieren.mp4" type="video/mp4"></video></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Gaming Modal -->
+  <div class="modal fade" id="gamingModal" tabindex="-1" aria-labelledby="gamingModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="gamingModalLabel">Gaming Gallery</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="gallery-grid">
+            <div class="gallery-item"><img src="./img/mobile legends.jpg" alt="Mobile Legends"></div>
+            <div class="gallery-item"><img src="./img/hsr.jpg" alt="HSR"></div>
+            <div class="gallery-item"><video controls><source src="./gameplays/zhuxin.mp4" type="video/mp4"></video></div>
+            <div class="gallery-item"><video controls><source src="./gameplays/granger.mp4" type="video/mp4"></video></div>
+            <div class="gallery-item"><video controls><source src="./gameplays/tournament.mp4" type="video/mp4"></video></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Boyfriend Gaming Modal -->
+  <div class="modal fade" id="bfGamingModal" tabindex="-1" aria-labelledby="bfGamingModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="bfGamingModalLabel">Boyfriend's Gaming Gallery</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="gallery-grid">
+            <div class="gallery-item"><video controls><source src="./gameplays/boyfiee.mp4" type="video/mp4"></video></div>
+            <div class="gallery-item"><video controls><source src="./gameplays/bf gameplay.mp4" type="video/mp4"></video></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Idols Modal -->
+  <div class="modal fade" id="idolsModal" tabindex="-1" aria-labelledby="idolsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="idolsModalLabel">Idols Gallery</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="gallery-grid">
+            <div class="gallery-item"><video controls><source src="./idols/hadjii.mp4" type="video/mp4"></video></div>
+            <div class="gallery-item"><video controls><source src="./idols/billie eilish.mp4" type="video/mp4"></video></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Road Trip Modal -->
+  <div class="modal fade" id="roadTripModal" tabindex="-1" aria-labelledby="roadTripModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="roadTripModalLabel">Road Trip Gallery</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="gallery-grid">
+            <div class="gallery-item"><img src="./img/fam.jpg" alt="Family"></div>
+            <div class="gallery-item"><img src="./img/baguio.jpg" alt="Baguio"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dogs Modal -->
+  <div class="modal fade" id="dogsModal" tabindex="-1" aria-labelledby="dogsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="dogsModalLabel">Dogs Gallery</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="gallery-grid">
+            <div class="gallery-item"><img src="./img/kiba and kobi.jpeg" alt="Kiba and Kobi"></div>
+            <div class="gallery-item"><img src="./img/kobi and kali.jpg" alt="Kobi and Kali"></div>
+            <div class="gallery-item"><img src="./img/Kobi.jpg" alt="Kobi"></div>
+            <div class="gallery-item"><img src="./img/Kiba.jpg" alt="Kiba"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap 5 JS and Popper.js -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Typing effect for hero section
+    const texts = ["dog lover", "editor", "gamer", "animator", "anime lover"];
+    let index = 0;
+    let charIndex = 0;
+    let currentText = "";
+    const typingTextElement = document.querySelector(".typing-text");
+
+    function type() {
+      if (charIndex < texts[index].length) {
+        currentText += texts[index].charAt(charIndex);
+        typingTextElement.textContent = currentText;
+        charIndex++;
+        setTimeout(type, 100);
+      } else {
+        setTimeout(erase, 1500);
+      }
+    }
+
+    function erase() {
+      if (charIndex > 0) {
+        currentText = currentText.slice(0, -1);
+        typingTextElement.textContent = currentText;
+        charIndex--;
+        setTimeout(erase, 50);
+      } else {
+        index = (index + 1) % texts.length;
+        setTimeout(type, 500);
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      type();
+    });
+  </script>
+</body>
+</html>
